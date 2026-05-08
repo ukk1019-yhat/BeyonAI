@@ -1,334 +1,143 @@
-export default function ExpressoAIWebsite() {
-  const navItems = [
-    'Platform',
-    'Simulations',
-    'Behavioral AI',
-    'Enterprise',
-    'API',
-    'Pricing',
-  ];
+# EXPRESSO AI
 
-  const simulations = [
-    'Sales Negotiation',
-    'Placement Interview',
-    'Leadership Crisis',
-    'Investor Pitching',
-    'Customer Escalation',
-    'Public Speaking',
-  ];
+## Behavioral Intelligence Infrastructure
 
-  const features = [
-    {
-      title: 'Behavioral Intelligence',
-      desc: 'AI-powered communication analysis with real-time behavioral scoring.',
-    },
-    {
-      title: 'Adaptive Simulations',
-      desc: 'Dynamic AI personas that evolve based on user interaction and decisions.',
-    },
-    {
-      title: 'Enterprise Analytics',
-      desc: 'Advanced workforce intelligence dashboards and communication insights.',
-    },
-  ];
+AI-powered simulation systems for communication, negotiation, leadership, and workforce intelligence.
 
-  return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.15),transparent_40%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+---
 
-      {/* Navbar */}
-      <header className="relative z-20 border-b border-white/10 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold tracking-widest">EXPRESSO AI</h1>
-            <p className="text-xs text-white/50 tracking-[0.3em] uppercase mt-1">
-              Behavioral Intelligence Infrastructure
-            </p>
-          </div>
+## Overview
 
-          <nav className="hidden md:flex gap-8 text-sm text-white/70">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="hover:text-white transition-all duration-300 hover:scale-105"
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
+EXPRESSO AI is a next-generation Behavioral Intelligence platform that creates adaptive AI-driven simulations for high-stakes human interactions.
 
-          <button className="px-5 py-2 rounded-full bg-white text-black font-medium hover:scale-105 transition-transform">
-            Try Demo
-          </button>
-        </div>
-      </header>
+The platform enables users to practice and improve:
 
-      {/* Hero Section */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-24 grid lg:grid-cols-2 gap-16 items-center">
-        <div>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-sm text-white/70 mb-8">
-            AI-Powered Workforce Intelligence
-          </div>
+- Negotiation
+- Communication
+- Leadership
+- Decision-making
+- Interview performance
+- Conflict resolution
+- Public speaking
 
-          <h2 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-            Behavioral Intelligence for the Future Workforce
-          </h2>
+Unlike traditional chatbots, EXPRESSO AI dynamically adapts conversations in real time based on:
 
-          <p className="mt-8 text-lg text-white/65 leading-relaxed max-w-2xl">
-            Adaptive AI simulations that train communication, negotiation,
-            leadership, and decision-making through realistic human interaction
-            environments.
-          </p>
+- User behavior
+- Emotional signals
+- Communication style
+- Confidence
+- Decision patterns
 
-          <div className="mt-10 flex flex-wrap gap-4">
-            <button className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition-transform shadow-2xl">
-              Start Simulation
-            </button>
+---
 
-            <button className="px-7 py-4 rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl hover:bg-white/10 transition-all">
-              Enterprise Demo
-            </button>
-          </div>
+# Core Vision
 
-          <div className="mt-14 grid grid-cols-3 gap-6">
-            {[
-              ['10K+', 'AI Simulations'],
-              ['92%', 'Performance Growth'],
-              ['24/7', 'Real-Time Analysis'],
-            ].map(([value, label]) => (
-              <div
-                key={label}
-                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-5"
-              >
-                <h3 className="text-3xl font-bold">{value}</h3>
-                <p className="text-sm text-white/50 mt-2">{label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+Building the infrastructure layer for human behavioral intelligence.
 
-        {/* Hero Dashboard */}
-        <div className="relative">
-          <div className="absolute -inset-10 bg-blue-500/20 blur-3xl rounded-full" />
+EXPRESSO AI combines:
 
-          <div className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-6 shadow-2xl">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h3 className="text-xl font-semibold">Simulation Dashboard</h3>
-                <p className="text-white/50 text-sm mt-1">
-                  Real-time Behavioral Intelligence
-                </p>
-              </div>
+- Conversational AI
+- Behavioral analytics
+- Emotional adaptation
+- Simulation intelligence
+- Communication scoring
+- Decision analysis
 
-              <div className="h-3 w-3 rounded-full bg-green-400 animate-pulse" />
-            </div>
+to create scalable AI-powered interaction environments.
 
-            <div className="space-y-5">
-              <div className="rounded-2xl bg-black/40 border border-white/10 p-5">
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-white/60">Negotiation Score</span>
-                  <span>91%</span>
-                </div>
-                <div className="h-3 rounded-full bg-white/10 overflow-hidden">
-                  <div className="h-full w-[91%] bg-white rounded-full" />
-                </div>
-              </div>
+---
 
-              <div className="grid grid-cols-2 gap-4">
-                {['Confidence', 'Leadership', 'Persuasion', 'Clarity'].map(
-                  (item, idx) => (
-                    <div
-                      key={item}
-                      className="rounded-2xl bg-black/40 border border-white/10 p-5"
-                    >
-                      <p className="text-white/60 text-sm">{item}</p>
-                      <h4 className="text-3xl font-bold mt-3">
-                        {88 + idx}%
-                      </h4>
-                    </div>
-                  )
-                )}
-              </div>
+# Features
 
-              <div className="rounded-2xl bg-black/40 border border-white/10 p-5">
-                <p className="text-white/60 text-sm mb-4">
-                  AI Emotional Adaptation
-                </p>
+## Adaptive AI Simulations
 
-                <div className="flex items-end gap-3 h-28">
-                  {[45, 80, 55, 90, 65, 100, 70].map((h, i) => (
-                    <div
-                      key={i}
-                      className="flex-1 rounded-t-xl bg-white/80"
-                      style={{ height: `${h}%` }}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+Realistic AI personas capable of:
 
-      {/* Features */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 py-24">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <p className="text-blue-400 uppercase tracking-[0.3em] text-sm mb-4">
-            Core Infrastructure
-          </p>
-          <h3 className="text-5xl font-bold">
-            AI Systems Designed for Human Performance
-          </h3>
-        </div>
+- Emotional adaptation
+- Dynamic conversations
+- Negotiation behavior
+- Pressure simulation
+- Context-aware interaction
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 hover:-translate-y-2 transition-all duration-300"
-            >
-              <div className="h-14 w-14 rounded-2xl bg-white/10 mb-6 flex items-center justify-center text-xl">
-                ✦
-              </div>
+---
 
-              <h4 className="text-2xl font-semibold mb-4">{feature.title}</h4>
-              <p className="text-white/60 leading-relaxed">{feature.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+## Behavioral Intelligence Engine
 
-      {/* Simulations */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 py-24">
-        <div className="flex items-center justify-between flex-wrap gap-6 mb-16">
-          <div>
-            <p className="text-blue-400 uppercase tracking-[0.3em] text-sm mb-4">
-              Simulation Environments
-            </p>
-            <h3 className="text-5xl font-bold max-w-2xl">
-              Train for Real-World High-Stakes Conversations
-            </h3>
-          </div>
+Analyze:
 
-          <button className="px-6 py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all">
-            Explore All
-          </button>
-        </div>
+- Persuasion ability
+- Leadership communication
+- Emotional regulation
+- Confidence
+- Communication clarity
+- Negotiation performance
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {simulations.map((sim) => (
-            <div
-              key={sim}
-              className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-xl p-8 hover:scale-[1.02] transition-all duration-300"
-            >
-              <div className="flex items-center justify-between mb-6">
-                <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center">
-                  AI
-                </div>
+---
 
-                <span className="text-xs px-3 py-1 rounded-full bg-white/10 border border-white/10 text-white/60">
-                  Adaptive
-                </span>
-              </div>
+## Real-Time Analytics
 
-              <h4 className="text-2xl font-semibold mb-3">{sim}</h4>
+Track:
 
-              <p className="text-white/60 leading-relaxed mb-6">
-                AI-driven behavioral simulation with emotional adaptation,
-                real-time scoring, and communication intelligence.
-              </p>
+- Communication scores
+- Behavioral improvements
+- Performance trends
+- Simulation replays
+- Interaction insights
 
-              <div className="flex items-center justify-between text-sm text-white/50">
-                <span>Behavioral Score</span>
-                <span>Live Analysis</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+---
 
-      {/* Enterprise Section */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 py-24">
-        <div className="rounded-[40px] border border-white/10 bg-white/5 backdrop-blur-2xl p-10 lg:p-16 grid lg:grid-cols-2 gap-14 items-center">
-          <div>
-            <p className="text-blue-400 uppercase tracking-[0.3em] text-sm mb-4">
-              Enterprise AI Infrastructure
-            </p>
+## Simulation Environments
 
-            <h3 className="text-5xl font-bold leading-tight">
-              Workforce Intelligence at Enterprise Scale
-            </h3>
+Practice scenarios including:
 
-            <p className="mt-8 text-white/65 leading-relaxed text-lg">
-              Deploy organization-wide behavioral intelligence systems with
-              adaptive simulations, communication analytics, leadership scoring,
-              and workforce performance dashboards.
-            </p>
+- Placement interviews
+- Sales negotiations
+- Investor pitching
+- Leadership conflicts
+- Customer escalation
+- Public speaking
 
-            <div className="mt-10 flex flex-wrap gap-4">
-              <button className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition-transform">
-                Request Enterprise Access
-              </button>
+---
 
-              <button className="px-7 py-4 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition-all">
-                API Documentation
-              </button>
-            </div>
-          </div>
+# Tech Stack
 
-          <div className="grid grid-cols-2 gap-5">
-            {[
-              'Behavioral Analytics',
-              'Leadership Intelligence',
-              'Simulation APIs',
-              'Communication Scoring',
-            ].map((item) => (
-              <div
-                key={item}
-                className="rounded-3xl border border-white/10 bg-black/40 p-8"
-              >
-                <div className="h-12 w-12 rounded-2xl bg-white/10 mb-5" />
-                <h4 className="text-xl font-semibold">{item}</h4>
-                <p className="text-white/50 mt-3 text-sm leading-relaxed">
-                  Enterprise-grade AI infrastructure for workforce behavioral
-                  intelligence.
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+## Frontend
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/10 mt-20">
-        <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h4 className="text-xl font-bold tracking-widest">EXPRESSO AI</h4>
-            <p className="text-white/50 mt-2 text-sm">
-              Building the Infrastructure for Human Behavioral Intelligence.
-            </p>
-          </div>
+- React.js
+- Next.js
+- Tailwind CSS
+- Framer Motion
 
-          <div className="flex gap-6 text-sm text-white/50">
-            <a href="#" className="hover:text-white transition-colors">
-              Platform
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Enterprise
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              API
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Pricing
-            </a>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-}
+## Backend
 
+- Python
+- FastAPI
+- Node.js
+
+## AI Infrastructure
+
+- Large Language Models
+- Voice AI Systems
+- Behavioral Scoring Models
+- Emotional Adaptation Systems
+
+## Cloud
+
+- Scalable AI inference
+- Real-time processing
+- Distributed architecture
+
+---
+
+# Product Architecture
+
+```bash
+User Interaction
+       ↓
+Simulation Engine
+       ↓
+Behavioral Intelligence Layer
+       ↓
+Real-Time Scoring System
+       ↓
+Analytics Dashboard
