@@ -24,10 +24,10 @@ export function Comparison() {
     <section className="py-32 bg-[#fdfbf7] relative border-t border-[#e3d5c1]">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">The Advantage</h2>
-          <h3 className="text-3xl md:text-4xl font-bold text-[#2c1e16]">Why Expresso AI</h3>
+          <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">Why EXPRESSO AI</h2>
+          <h3 className="text-3xl md:text-4xl font-bold text-[#2c1e16]">Static training doesn&apos;t change behavior.</h3>
           <p className="text-[#6e5646] mt-4 max-w-2xl mx-auto">
-            Static training is obsolete. Generic chatbots lack behavioral context. We built the infrastructure specifically for human performance.
+            Watching videos and clicking through slides doesn&apos;t prepare your team for a real objection. Adaptive AI roleplay does.
           </p>
         </div>
 

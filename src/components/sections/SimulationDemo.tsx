@@ -96,17 +96,17 @@ export function SimulationDemo() {
         {/* Right: Copy & Context */}
         <div className="flex flex-col gap-8">
           <div>
-            <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">Adaptive Intelligence</h2>
-            <h3 className="text-3xl md:text-5xl font-bold text-[#2c1e16] mb-6">Experience hyper-realistic conversations.</h3>
+            <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">Interactive Demo</h2>
+            <h3 className="text-3xl md:text-5xl font-bold text-[#2c1e16] mb-6">See a live AI roleplay simulation.</h3>
             <p className="text-lg text-[#6e5646] leading-relaxed">
-              Our Behavioral Engine doesn't just read scripts. It maintains complex emotional states, remembers conversational history, and dynamically shifts tactics based on your performance.
+              The AI buyer reacts to your tone, word choice, and confidence in real time — not a script. Every session is different.
             </p>
           </div>
 
           <div className="space-y-4">
-            <FeatureRow title="Dynamic Objections" description="AI throws curveballs based on your specific industry and product." />
-            <FeatureRow title="Emotional Volatility" description="Personas get frustrated, receptive, or skeptical based on your tone." />
-            <FeatureRow title="Real-Time Branching" description="Every word you say alters the trajectory of the simulation entirely." />
+            <FeatureRow title="Realistic Objections" description="AI throws the exact objections your team faces — pricing, competition, timing." />
+            <FeatureRow title="Adaptive Tone" description="Personas shift from skeptical to receptive based on how well you respond." />
+            <FeatureRow title="Instant Scoring" description="Every response is scored live so you know exactly where you improved." />
           </div>
         </div>
 

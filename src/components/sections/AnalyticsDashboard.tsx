@@ -11,10 +11,10 @@ export function AnalyticsDashboard() {
 
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16 relative z-10">
-          <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">Enterprise Analytics</h2>
-          <h3 className="text-3xl md:text-5xl font-bold text-[#2c1e16]">Measure What Was Previously Unmeasurable</h3>
+          <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">Analytics Dashboard</h2>
+          <h3 className="text-3xl md:text-5xl font-bold text-[#2c1e16]">See exactly where your team needs coaching.</h3>
           <p className="text-[#6e5646] mt-4 max-w-2xl mx-auto text-lg">
-            Move beyond completion rates. Track persuasion, adaptability, and emotional control across your entire organization in real-time.
+            Track persuasion, objection handling, and communication clarity across every rep — with team-level benchmarks and trend data over time.
           </p>
         </div>
 

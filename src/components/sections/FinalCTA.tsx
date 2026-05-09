@@ -22,11 +22,11 @@ export function FinalCTA() {
             className="lg:pt-4"
           >
             <h2 className="text-4xl md:text-6xl font-bold text-[#2c1e16] mb-6 tracking-tight">
-              Train Human Performance <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a67243] to-[#704823]">at Scale.</span>
+              Build high-performing teams<br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a67243] to-[#704823]">with AI-powered simulations.</span>
             </h2>
             <p className="text-lg text-[#6e5646] mb-10 max-w-xl">
-              Stop relying on subjective feedback and static roleplay. Deploy adaptive behavioral intelligence to your entire organization today.
+              Stop relying on static training and subjective feedback. Give your team unlimited practice reps against realistic AI — and measure every improvement.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
               <a

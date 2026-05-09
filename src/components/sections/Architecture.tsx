@@ -51,10 +51,10 @@ export function Architecture() {
 
         {/* Right: Copy */}
         <div className="relative z-10">
-          <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">Technical Architecture</h2>
+          <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">Architecture</h2>
           <h3 className="text-3xl md:text-5xl font-bold text-[#2c1e16] mb-6">Built for scale, speed, and security.</h3>
           <p className="text-lg text-[#6e5646] leading-relaxed mb-8">
-            Our platform isn't a wrapper. We engineered a proprietary stack that decouples conversational generation from behavioral analysis, ensuring sub-second latency while processing 500+ data points per utterance.
+            A purpose-built simulation engine — not a chatbot wrapper. We process 500+ behavioral signals per response at sub-200ms latency, with enterprise-grade security and SOC2 compliance.
           </p>
           
           <div className="grid grid-cols-2 gap-6 pt-8 border-t border-[#e3d5c1]">

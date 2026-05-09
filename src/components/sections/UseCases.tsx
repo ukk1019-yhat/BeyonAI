@@ -1,62 +1,50 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, LineChart, Users, Headset, Handshake, Brain } from "lucide-react";
+import { LineChart, Headset, Briefcase, Users } from "lucide-react";
 
 export function UseCases() {
   const cases = [
     {
       title: "Sales Training",
-      description: "Train reps to handle complex pricing objections and navigate procurement teams without burning live leads.",
+      description: "Reps practice pricing objections, discovery calls, and competitive displacement against adaptive AI buyers — before touching a live prospect.",
       roi: "35% Faster Ramp Time",
-      icon: <LineChart size={24} className="text-[#8b5a2b]" />
-    },
-    {
-      title: "Leadership Coaching",
-      description: "Prepare executives for crisis communications, board meetings, and difficult performance reviews.",
-      roi: "40% Higher Confidence Scores",
-      icon: <Briefcase size={24} className="text-emerald-500" />
-    },
-    {
-      title: "Hiring & Recruitment",
-      description: "Assess candidate communication skills through standardized AI roleplays before the final human interview.",
-      roi: "Save 20+ Hours/Hire",
-      icon: <Users size={24} className="text-blue-500" />
+      icon: <LineChart size={24} className="text-[#8b5a2b]" />,
     },
     {
       title: "Customer Support",
-      description: "Simulate irate customers and complex edge cases to build empathy and de-escalation skills safely.",
+      description: "Agents simulate irate customers and complex escalations to build empathy and de-escalation skills in a safe environment.",
       roi: "50% Drop in Escalations",
-      icon: <Headset size={24} className="text-violet-500" />
+      icon: <Headset size={24} className="text-emerald-500" />,
     },
     {
-      title: "Negotiation Practice",
-      description: "Enterprise-grade procurement simulations that force teams to defend value and maintain margins.",
-      roi: "15% Margin Preservation",
-      icon: <Handshake size={24} className="text-rose-500" />
+      title: "Leadership Coaching",
+      description: "Managers and executives practice difficult performance reviews, crisis briefings, and board presentations with realistic AI personas.",
+      roi: "40% Higher Confidence",
+      icon: <Briefcase size={24} className="text-blue-500" />,
     },
     {
-      title: "Communication Intelligence",
-      description: "Org-wide benchmarking of clarity, persuasion, and emotional control across thousands of employees.",
-      roi: "Enterprise Deployment",
-      icon: <Brain size={24} className="text-amber-500" />
-    }
+      title: "Recruitment Training",
+      description: "Hiring teams run standardized AI interview simulations to assess candidate communication skills before the final human round.",
+      roi: "Save 20+ Hours / Hire",
+      icon: <Users size={24} className="text-violet-500" />,
+    },
   ];
 
   return (
     <section className="py-24 bg-[#fdfbf7] relative border-t border-[#e3d5c1]" id="use-cases">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-          <div className="max-w-2xl">
-            <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">Enterprise Scale</h2>
-            <h3 className="text-3xl md:text-5xl font-bold text-[#2c1e16] leading-tight">Built for the most critical human workflows.</h3>
-          </div>
-          <p className="text-[#6e5646] max-w-md">
-            EXPRESSO AI provides role-specific behavioral infrastructure designed to deliver immediate, measurable business impact.
+        <div className="mb-16">
+          <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">Use Cases</h2>
+          <h3 className="text-3xl md:text-5xl font-bold text-[#2c1e16] leading-tight max-w-2xl">
+            Built for the conversations that drive revenue.
+          </h3>
+          <p className="text-[#6e5646] mt-4 max-w-xl">
+            One platform. Four high-impact workflows. Each with measurable outcomes your team can track from day one.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {cases.map((useCase, idx) => (
             <motion.div
               key={idx}
@@ -64,20 +52,16 @@ export function UseCases() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="bg-[#fdfbf7] border border-[#d4c3ab] rounded-2xl p-8 hover:border-[#c4b094] transition-all group relative overflow-hidden"
+              className="bg-[#fdfbf7] border border-[#d4c3ab] rounded-2xl p-8 hover:border-[#c4b094] transition-all group"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-10 -mt-10 group-hover:bg-white/10 transition-colors" />
-              
               <div className="w-12 h-12 rounded-xl bg-[#f4ebd8] border border-[#d4c3ab] flex items-center justify-center mb-6">
                 {useCase.icon}
               </div>
-              
               <h4 className="text-xl font-bold text-[#2c1e16] mb-3">{useCase.title}</h4>
-              <p className="text-sm text-[#6e5646] leading-relaxed mb-8 min-h-[60px]">
+              <p className="text-sm text-[#6e5646] leading-relaxed mb-6">
                 {useCase.description}
               </p>
-              
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f4ebd8] border border-[#d4c3ab] mt-auto">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f4ebd8] border border-[#d4c3ab]">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                 <span className="text-xs font-semibold text-[#5c4433] uppercase tracking-wider">{useCase.roi}</span>
               </div>
