@@ -5,7 +5,7 @@ import { BarChart3, Activity, TrendingUp, Target, BrainCircuit } from "lucide-re
 
 export function AnalyticsDashboard() {
   return (
-    <section className="py-32 bg-[#fdfbf7] relative border-t border-[#e3d5c1]" id="analytics">
+    <section className="py-16 sm:py-32 bg-[#fdfbf7] relative border-t border-[#e3d5c1]" id="analytics">
       {/* Decorative Gradients */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-[#704823]/5 rounded-full blur-[120px] pointer-events-none" />
 

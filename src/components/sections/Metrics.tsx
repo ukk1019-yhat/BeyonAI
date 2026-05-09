@@ -28,7 +28,7 @@ const capabilities = [
 
 export function Metrics() {
   return (
-    <section className="py-24 bg-[#fdfbf7] relative border-t border-[#e3d5c1]">
+    <section className="py-16 sm:py-24 bg-[#fdfbf7] relative border-t border-[#e3d5c1]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">Product Features</h2>

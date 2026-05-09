@@ -32,13 +32,13 @@ export function HowItWorks() {
   ];
 
   return (
-    <section className="py-24 bg-[#fdfbf7] relative border-t border-[#e3d5c1]" id="how-it-works">
+    <section className="py-16 sm:py-24 bg-[#fdfbf7] relative border-t border-[#e3d5c1]" id="how-it-works">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">How It Works</h2>
           <h3 className="text-3xl md:text-4xl font-bold text-[#2c1e16]">From scenario to skill improvement in four steps.</h3>
           <p className="text-[#6e5646] mt-4 max-w-xl mx-auto">
-            No setup required. Pick a scenario, start talking, and get scored — all in the same session.
+            No setup required. Pick a scenario, start talking, and get scored - all in the same session.
           </p>
         </div>
 

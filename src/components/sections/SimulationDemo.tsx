@@ -27,7 +27,7 @@ export function SimulationDemo() {
   }, [isPlaying, messages.length]);
 
   return (
-    <section className="py-32 bg-[#fdfbf7] relative" id="live-simulation">
+    <section className="py-16 sm:py-32 bg-[#fdfbf7] relative" id="live-simulation">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         
         {/* Left: Interactive Demo UI */}

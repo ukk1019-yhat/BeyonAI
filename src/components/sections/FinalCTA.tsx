@@ -7,7 +7,7 @@ import { ContactForm } from "@/components/ContactForm";
 
 export function FinalCTA() {
   return (
-    <section className="py-32 bg-[#fdfbf7] relative border-t border-[#e3d5c1] overflow-hidden" id="contact">
+    <section className="py-16 sm:py-32 bg-[#fdfbf7] relative border-t border-[#e3d5c1] overflow-hidden" id="contact">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#704823]/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
