@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 };
 
 const metrics = [
-  { icon: <TrendingUp size={20} className="text-emerald-500" />, label: "Avg. Improvement", value: "+34%", sub: "after 10 sessions" },
+  { icon: <TrendingUp size={20} className="text-emerald-500" />, label: "Track Improvement", value: "Over Time", sub: "session by session" },
   { icon: <Users size={20} className="text-blue-500" />, label: "Team Benchmarking", value: "Org-wide", sub: "across all roles" },
-  { icon: <Target size={20} className="text-[#8b5a2b]" />, label: "Dimensions Tracked", value: "500+", sub: "per session" },
-  { icon: <BarChart2 size={20} className="text-violet-500" />, label: "Data Retention", value: "Full history", sub: "with trend analysis" },
+  { icon: <Target size={20} className="text-[#8b5a2b]" />, label: "Dimensions Tracked", value: "Per Session", sub: "clarity, persuasion, confidence" },
+  { icon: <BarChart2 size={20} className="text-violet-500" />, label: "Data Retention", value: "Full History", sub: "with trend analysis" },
 ];
 
 export default function AnalyticsPage() {

@@ -7,10 +7,10 @@ export const metadata: Metadata = {
 };
 
 const outcomes = [
-  { icon: <Clock size={20} className="text-emerald-500" />, stat: "20+", label: "Hours Saved / Hire", desc: "Automated first-round behavioral screening before any human interview time." },
+  { icon: <Clock size={20} className="text-emerald-500" />, stat: "Less", label: "Screening Time", desc: "Automated first-round behavioral screening before any human interview time." },
   { icon: <Target size={20} className="text-[#8b5a2b]" />, stat: "Objective", label: "Scoring", desc: "Eliminate interviewer bias with consistent, data-driven behavioral scores." },
   { icon: <Users size={20} className="text-blue-500" />, stat: "Scalable", label: "At Any Volume", desc: "Screen 10 or 10,000 candidates with the same quality and consistency." },
-  { icon: <CheckCircle size={20} className="text-violet-500" />, stat: "Custom", label: "Role Profiles", desc: "Define the behavioral benchmarks for each role and let the AI assess against them." },
+  { icon: <CheckCircle size={20} className="text-violet-500" />, stat: "Custom", label: "Role Profiles", desc: "Define the behavioral benchmarks for each role and assess against them." },
 ];
 
 export default function RecruitmentPage() {
@@ -26,7 +26,7 @@ export default function RecruitmentPage() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a67243] to-[#704823]">actually communicate.</span>
           </h1>
           <p className="text-lg text-[#6e5646] max-w-2xl mx-auto mb-10 leading-relaxed">
-            Standardized AI behavioral interviews that assess communication skills, emotional intelligence, and role-fit — before a single human hour is spent.
+            Standardized AI behavioral interviews that assess communication skills, emotional intelligence, and role-fit - before a single human hour is spent.
           </p>
           <a
             href="https://calendly.com/ukkukk97/30min"

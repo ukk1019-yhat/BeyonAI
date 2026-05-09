@@ -7,10 +7,10 @@ export const metadata: Metadata = {
 };
 
 const outcomes = [
-  { icon: <TrendingUp size={20} className="text-emerald-500" />, stat: "35%", label: "Faster Ramp Time", desc: "New reps reach quota faster by practicing on AI before burning live leads." },
-  { icon: <Target size={20} className="text-[#8b5a2b]" />, stat: "15%", label: "Margin Preservation", desc: "Teams trained on pricing pressure simulations defend value more effectively." },
-  { icon: <Clock size={20} className="text-blue-500" />, stat: "10×", label: "More Practice Reps", desc: "Unlimited AI simulations vs. limited manager roleplay time." },
-  { icon: <BarChart2 size={20} className="text-violet-500" />, stat: "500+", label: "Dimensions Scored", desc: "Objective data on every rep's persuasion, clarity, and objection handling." },
+  { icon: <TrendingUp size={20} className="text-emerald-500" />, stat: "Faster", label: "Rep Ramp Time", desc: "Reps practice objections before live calls — not on them." },
+  { icon: <Target size={20} className="text-[#8b5a2b]" />, stat: "Better", label: "Margin Defense", desc: "Teams trained on pricing pressure hold value more consistently." },
+  { icon: <Clock size={20} className="text-blue-500" />, stat: "More", label: "Practice Reps", desc: "Unlimited AI sessions vs. limited manager roleplay time." },
+  { icon: <BarChart2 size={20} className="text-violet-500" />, stat: "Objective", label: "Scoring", desc: "Every rep gets consistent, data-driven feedback — not opinions." },
 ];
 
 const scenarios = [

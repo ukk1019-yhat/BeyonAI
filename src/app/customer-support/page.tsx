@@ -7,10 +7,10 @@ export const metadata: Metadata = {
 };
 
 const outcomes = [
-  { icon: <TrendingDown size={20} className="text-emerald-500" />, stat: "50%", label: "Drop in Escalations", desc: "Teams trained on de-escalation simulations resolve more tickets at tier 1." },
-  { icon: <Heart size={20} className="text-rose-500" />, stat: "Empathy", label: "Scoring", desc: "Objective measurement of empathy, tone, and emotional attunement in every session." },
+  { icon: <TrendingDown size={20} className="text-emerald-500" />, stat: "Fewer", label: "Escalations", desc: "Agents trained on de-escalation handle more tickets at tier 1." },
+  { icon: <Heart size={20} className="text-rose-500" />, stat: "Scored", label: "Empathy", desc: "Objective measurement of tone, empathy, and emotional attunement per session." },
   { icon: <Zap size={20} className="text-amber-500" />, stat: "Safe", label: "Practice Space", desc: "Agents practice on irate AI customers before handling real ones." },
-  { icon: <BarChart2 size={20} className="text-blue-500" />, stat: "Team", label: "Benchmarks", desc: "Identify which agents need coaching and which are ready to handle escalations." },
+  { icon: <BarChart2 size={20} className="text-blue-500" />, stat: "Team", label: "Benchmarks", desc: "Identify which agents need coaching and which are ready for escalations." },
 ];
 
 const scenarios = [

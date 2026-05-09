@@ -14,7 +14,7 @@ export function AnalyticsDashboard() {
           <h2 className="text-sm font-semibold tracking-widest text-[#8b5a2b] uppercase mb-3">Analytics Dashboard</h2>
           <h3 className="text-3xl md:text-5xl font-bold text-[#2c1e16]">See exactly where your team needs coaching.</h3>
           <p className="text-[#6e5646] mt-4 max-w-2xl mx-auto text-lg">
-            Track persuasion, objection handling, and communication clarity across every rep — with team-level benchmarks and trend data over time.
+            Track persuasion, objection handling, and communication clarity across every rep - with team-level benchmarks and trend data over time.
           </p>
         </div>
 
@@ -34,7 +34,7 @@ export function AnalyticsDashboard() {
               </div>
               <div>
                 <h4 className="text-[#2c1e16] font-semibold">Global Sales Team Performance</h4>
-                <p className="text-xs text-[#826a57]">Last 30 Days • 1,240 Simulations Completed</p>
+                <p className="text-xs text-[#826a57]">Last 30 Days · Demo Dashboard</p>
               </div>
             </div>
             <div className="hidden md:flex gap-2">

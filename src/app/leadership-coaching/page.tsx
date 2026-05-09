@@ -7,10 +7,10 @@ export const metadata: Metadata = {
 };
 
 const outcomes = [
-  { icon: <TrendingUp size={20} className="text-emerald-500" />, stat: "40%", label: "Higher Confidence", desc: "Executives report significantly higher confidence after structured simulation practice." },
-  { icon: <Shield size={20} className="text-[#8b5a2b]" />, stat: "Safe", label: "Practice Environment", desc: "Fail safely in a simulation before a real board meeting or crisis briefing." },
-  { icon: <Users size={20} className="text-blue-500" />, stat: "Scalable", label: "Across All Levels", desc: "From frontline managers to C-suite — consistent, objective coaching at scale." },
-  { icon: <Briefcase size={20} className="text-violet-500" />, stat: "Custom", label: "Scenarios", desc: "Build simulations from your actual org structure, culture, and leadership challenges." },
+  { icon: <TrendingUp size={20} className="text-emerald-500" />, stat: "Higher", label: "Confidence", desc: "Leaders practice the hardest conversations before they happen for real." },
+  { icon: <Shield size={20} className="text-[#8b5a2b]" />, stat: "Safe", label: "Practice Space", desc: "Fail in a simulation, not in a board meeting or performance review." },
+  { icon: <Users size={20} className="text-blue-500" />, stat: "Scalable", label: "Across All Levels", desc: "From frontline managers to C-suite — consistent coaching at scale." },
+  { icon: <Briefcase size={20} className="text-violet-500" />, stat: "Custom", label: "Scenarios", desc: "Build simulations from your actual org structure and leadership challenges." },
 ];
 
 const scenarios = [

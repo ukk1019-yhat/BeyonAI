@@ -52,19 +52,19 @@ export function Hero() {
             </a>
           </div>
 
-          {/* Social proof strip */}
+          {/* What it scores */}
           <div className="flex flex-wrap gap-6 pt-4 border-t border-[#e3d5c1] mt-2">
-            <div>
-              <div className="text-xl font-bold text-[#2c1e16]">35%</div>
-              <div className="text-xs text-[#826a57] uppercase tracking-wider font-medium">Faster Onboarding</div>
+            <div className="flex items-center gap-2 text-sm text-[#6e5646]">
+              <span className="w-2 h-2 rounded-full bg-[#8b5a2b]" /> Persuasion
             </div>
-            <div>
-              <div className="text-xl font-bold text-[#2c1e16]">500+</div>
-              <div className="text-xs text-[#826a57] uppercase tracking-wider font-medium">Behaviors Scored</div>
+            <div className="flex items-center gap-2 text-sm text-[#6e5646]">
+              <span className="w-2 h-2 rounded-full bg-blue-500" /> Clarity
             </div>
-            <div>
-              <div className="text-xl font-bold text-[#2c1e16]">50%</div>
-              <div className="text-xs text-[#826a57] uppercase tracking-wider font-medium">Fewer Escalations</div>
+            <div className="flex items-center gap-2 text-sm text-[#6e5646]">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" /> Objection Handling
+            </div>
+            <div className="flex items-center gap-2 text-sm text-[#6e5646]">
+              <span className="w-2 h-2 rounded-full bg-violet-500" /> Confidence
             </div>
           </div>
         </motion.div>
