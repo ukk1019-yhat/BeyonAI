@@ -14,7 +14,6 @@ import {
   User,
   Zap,
   AlertTriangle,
-  X,
   RefreshCw,
 } from "lucide-react";
 
@@ -118,7 +117,8 @@ export default function AICoachPage() {
   const [autoMode, setAutoMode] = useState(true); // auto-capture every N seconds
   const [lastFrameTime, setLastFrameTime] = useState<number | null>(null);
 
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const captureVideoRef = useRef<HTMLVideoElement>(null); // hidden, used for frame capture
+  const previewVideoRef = useRef<HTMLVideoElement>(null);  // visible screen preview
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -161,10 +161,10 @@ export default function AICoachPage() {
   }
 
   const analyzeFrame = useCallback(async (userMsg?: string) => {
-    if (!videoRef.current || !canvasRef.current) return;
+    if (!captureVideoRef.current || !canvasRef.current) return;
     if (sessionState !== "active") return;
 
-    const frameBase64 = captureFrame(videoRef.current, canvasRef.current);
+    const frameBase64 = captureFrame(captureVideoRef.current, canvasRef.current);
     if (!frameBase64) return;
 
     setIsAnalyzing(true);
@@ -240,9 +240,16 @@ export default function AICoachPage() {
 
       streamRef.current = stream;
 
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
+      // Attach to capture video (hidden)
+      if (captureVideoRef.current) {
+        captureVideoRef.current.srcObject = stream;
+        await captureVideoRef.current.play();
+      }
+
+      // Attach to preview video (visible)
+      if (previewVideoRef.current) {
+        previewVideoRef.current.srcObject = stream;
+        await previewVideoRef.current.play();
       }
 
       // Handle user stopping share via browser UI
@@ -253,7 +260,7 @@ export default function AICoachPage() {
       setSessionState("active");
       setMessages([{
         role: "assistant",
-        content: "👋 I can see your screen! I'll analyze it every few seconds and guide you through your marketing tasks. You can also ask me anything specific by typing below.\n\n✅ **Do this next:** Tell me what marketing task you're working on so I can give you focused guidance.",
+        content: "👋 I can see your screen! I'll analyze it every few seconds and guide you through your marketing tasks. You can also ask me anything specific by typing below.\n\n✅ Do this next: Tell me what marketing task you're working on so I can give you focused guidance.",
         timestamp: Date.now(),
       }]);
     } catch (err) {
@@ -269,7 +276,8 @@ export default function AICoachPage() {
     }
     if (timerRef.current) clearInterval(timerRef.current);
     if (captureRef.current) clearInterval(captureRef.current);
-    if (videoRef.current) videoRef.current.srcObject = null;
+    if (captureVideoRef.current) captureVideoRef.current.srcObject = null;
+    if (previewVideoRef.current) previewVideoRef.current.srcObject = null;
     setSessionState("idle");
   }
 
@@ -311,8 +319,8 @@ export default function AICoachPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex flex-col">
-      {/* Hidden video + canvas for frame capture */}
-      <video ref={videoRef} className="hidden" muted playsInline />
+      {/* Hidden video for frame capture + canvas */}
+      <video ref={captureVideoRef} className="hidden" muted playsInline />
       <canvas ref={canvasRef} className="hidden" />
 
       {/* Header */}
@@ -412,7 +420,7 @@ export default function AICoachPage() {
             <div className="flex-1 p-3 flex items-center justify-center">
               <div className="w-full rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900">
                 <video
-                  ref={videoRef}
+                  ref={previewVideoRef}
                   className="w-full h-auto"
                   muted
                   playsInline
