@@ -61,7 +61,7 @@ export default function AboutUsPage() {
               { num: "$370B", label: "Annual corporate training spend" },
               { num: "70%", label: "Produces no measurable behavior change" },
               { num: "85%", label: "Of job success comes from soft skills" },
-              { num: "0", label: "Scalable systems to measure them — until now" },
+              { num: "0", label: "Scalable systems to measure them - until now" },
             ].map((item, i) => (
               <div key={i} className="bg-[#f4ebd8] border border-[#d4c3ab] rounded-2xl p-6 text-center">
                 <div className="text-3xl font-bold text-[#2c1e16] mb-2">{item.num}</div>
@@ -89,7 +89,6 @@ export default function AboutUsPage() {
           </div>
         </div>
       </section>
-
       {/* Vision */}
       <section className="py-24 px-6 border-b border-[#e3d5c1]">
         <div className="max-w-4xl mx-auto text-center">

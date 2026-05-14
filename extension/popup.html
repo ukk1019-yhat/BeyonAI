@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EXPRESSO AI Agent</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 320px;
+      background: #0a0a0f;
+      color: #e4e4e7;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      padding: 20px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #27272a;
+    }
+    .logo {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: #c47d3b; }
+    .badge {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #c47d3b22;
+      border: 1px solid #c47d3b44;
+      color: #c47d3b;
+    }
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 12px;
+      background: #111118;
+      border: 1px solid #27272a;
+      border-radius: 12px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    .dot.inactive { background: #52525b; animation: none; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .status-text { font-size: 13px; color: #a1a1aa; }
+    .status-text strong { color: #e4e4e7; }
+    .id-box {
+      background: #111118;
+      border: 1px solid #27272a;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+    }
+    .id-label { font-size: 10px; color: #71717a; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .id-value {
+      font-size: 11px;
+      font-family: monospace;
+      color: #c47d3b;
+      word-break: break-all;
+      cursor: pointer;
+      user-select: all;
+    }
+    .copy-hint { font-size: 10px; color: #52525b; margin-top: 4px; }
+    .instructions {
+      font-size: 12px;
+      color: #71717a;
+      line-height: 1.6;
+    }
+    .instructions ol { padding-left: 16px; }
+    .instructions li { margin-bottom: 6px; }
+    .instructions a { color: #c47d3b; text-decoration: none; }
+    .instructions a:hover { text-decoration: underline; }
+    .divider { border: none; border-top: 1px solid #27272a; margin: 16px 0; }
+    .tab-info {
+      font-size: 11px;
+      color: #52525b;
+      padding: 8px 12px;
+      background: #111118;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .tab-info strong { color: #a1a1aa; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">EXPRESSO<span>AI</span></div>
+    <div class="badge">Agent</div>
+  </div>
+
+  <div class="status-row">
+    <div class="dot" id="statusDot"></div>
+    <div class="status-text" id="statusText"><strong>Agent Active</strong> — ready for commands</div>
+  </div>
+
+  <div class="id-box">
+    <div class="id-label">Extension ID (paste into AI Coach)</div>
+    <div class="id-value" id="extId">Loading...</div>
+    <div class="copy-hint">Click to select · Ctrl+C to copy</div>
+  </div>
+
+  <div class="tab-info" id="tabInfo">
+    <strong>Active tab:</strong> <span id="tabUrl">—</span>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="instructions">
+    <ol>
+      <li>Copy the Extension ID above</li>
+      <li>Open <a href="http://localhost:3000/ai-coach" target="_blank">AI Coach</a></li>
+      <li>Paste the ID in the Extension ID field</li>
+      <li>Share your screen and give voice/text commands</li>
+    </ol>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

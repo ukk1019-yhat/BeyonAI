@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   Monitor, MonitorOff, Send, Loader2, ArrowLeft, Clock,
   Crown, Bot, User, Zap, AlertTriangle, RefreshCw, Mic, MicOff, Volume2, VolumeX,
+  Copy, CheckCircle2,
 } from "lucide-react";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -57,7 +58,154 @@ function captureFrame(video: HTMLVideoElement, canvas: HTMLCanvasElement): strin
   } catch { return null; }
 }
 
-// ─── Upgrade Modal ────────────────────────────────────────────────────────────
+// ─── Extension Bridge ─────────────────────────────────────────────────────────
+// Declare chrome global (available when page is loaded inside Chrome with extension)
+declare const chrome: {
+  runtime: {
+    sendMessage: (
+      extensionId: string,
+      message: unknown,
+      callback: (response: { success: boolean; result?: unknown; error?: string }) => void
+    ) => void;
+    lastError?: { message?: string };
+  };
+} | undefined;
+
+async function sendToExtension(
+  extensionId: string,
+  action: string,
+  payload: Record<string, unknown>
+): Promise<{ success: boolean; result?: unknown; error?: string }> {
+  return new Promise((resolve) => {
+    if (typeof chrome === "undefined" || !chrome?.runtime?.sendMessage) {
+      resolve({ success: false, error: "Chrome extension API not available" });
+      return;
+    }
+    try {
+      chrome.runtime.sendMessage(extensionId, { action, payload }, (response) => {
+        if (chrome?.runtime?.lastError) {
+          resolve({ success: false, error: chrome.runtime.lastError.message });
+        } else {
+          resolve(response || { success: false, error: "No response" });
+        }
+      });
+    } catch (e) {
+      resolve({ success: false, error: String(e) });
+    }
+  });
+}
+
+// Parse AI response to extract executable actions
+function parseActionsFromResponse(response: string): Array<{ action: string; payload: Record<string, unknown> }> {
+  const actions: Array<{ action: string; payload: Record<string, unknown> }> = [];
+
+  // Look for ACTION blocks in the response: ACTION:sendMessage PAYLOAD:{...}
+  const actionRegex = /ACTION:\s*(\w+)\s*PAYLOAD:\s*(\{[\s\S]*?\})/gi;
+  let match;
+  while ((match = actionRegex.exec(response)) !== null) {
+    try {
+      actions.push({ action: match[1], payload: JSON.parse(match[2]) });
+    } catch { /* skip malformed */ }
+  }
+  return actions;
+}
+function parseResponse(content: string): { type: "text" | "output"; text: string }[] {
+  const outputMatch = content.match(/OUTPUT:\s*([\s\S]*?)(?=DONE:|$)/i);
+  const doneMatch = content.match(/DONE:\s*([\s\S]*?)$/i);
+
+  if (!outputMatch) {
+    return [{ type: "text", text: content }];
+  }
+
+  const segments: { type: "text" | "output"; text: string }[] = [];
+
+  // Everything before OUTPUT:
+  const before = content.slice(0, content.search(/OUTPUT:/i)).trim();
+  if (before) segments.push({ type: "text", text: before });
+
+  // The output block itself
+  const outputText = outputMatch[1].trim();
+  if (outputText) segments.push({ type: "output", text: outputText });
+
+  // DONE note
+  if (doneMatch) {
+    const doneText = doneMatch[1].trim();
+    if (doneText) segments.push({ type: "text", text: "✅ " + doneText });
+  }
+
+  return segments;
+}
+
+// ─── Message bubble with copy support ────────────────────────────────────────
+function MessageBubble({ msg }: { msg: Message }) {
+  const [copied, setCopied] = useState(false);
+
+  if (msg.role === "user") {
+    return (
+      <div className="flex gap-3 flex-row-reverse">
+        <div className="w-8 h-8 rounded-full bg-zinc-700 border border-zinc-600 flex items-center justify-center flex-shrink-0 mt-1">
+          <User size={14} className="text-zinc-300" />
+        </div>
+        <div className="max-w-[85%] px-4 py-3 rounded-2xl rounded-tr-sm bg-[#c47d3b] text-white text-sm leading-relaxed">
+          {msg.content}
+        </div>
+      </div>
+    );
+  }
+
+  const segments = parseResponse(msg.content);
+  const outputSegment = segments.find(s => s.type === "output");
+
+  function handleCopy() {
+    if (!outputSegment) return;
+    navigator.clipboard.writeText(outputSegment.text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
+
+  return (
+    <div className="flex gap-3">
+      <div className="w-8 h-8 rounded-full bg-[#c47d3b]/20 border border-[#c47d3b]/30 flex items-center justify-center flex-shrink-0 mt-1">
+        <Bot size={14} className="text-[#c47d3b]" />
+      </div>
+      <div className="flex-1 min-w-0 space-y-2">
+        <div className="text-xs text-zinc-500 font-medium flex items-center gap-1.5 mt-1">
+          <Bot size={10} /> AI Agent
+        </div>
+
+        {segments.map((seg, i) =>
+          seg.type === "output" ? (
+            <div key={i} className="bg-zinc-900 border border-[#c47d3b]/30 rounded-xl overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-2 border-b border-zinc-800 bg-[#c47d3b]/5">
+                <span className="text-xs font-semibold text-[#c47d3b] uppercase tracking-wider">
+                  Ready to use
+                </span>
+                <button
+                  onClick={handleCopy}
+                  className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all ${
+                    copied
+                      ? "bg-emerald-500/20 border border-emerald-500/30 text-emerald-400"
+                      : "bg-[#c47d3b] hover:bg-[#a66830] text-white"
+                  }`}
+                >
+                  {copied ? <><CheckCircle2 size={12} /> Copied!</> : <><Copy size={12} /> Copy</>}
+                </button>
+              </div>
+              <pre className="px-4 py-3 text-sm text-zinc-200 whitespace-pre-wrap font-sans leading-relaxed">
+                {seg.text}
+              </pre>
+            </div>
+          ) : (
+            <p key={i} className="text-sm text-zinc-300 leading-relaxed whitespace-pre-wrap">
+              {seg.text}
+            </p>
+          )
+        )}
+      </div>
+    </div>
+  );
+}
 function UpgradeModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
@@ -106,6 +254,11 @@ export default function AICoachPage() {
   const [voiceState, setVoiceState] = useState<VoiceState>("off");
   const [voiceTranscript, setVoiceTranscript] = useState("");
   const [ttsEnabled, setTtsEnabled] = useState(true);
+
+  // Extension bridge
+  const [extensionId, setExtensionId] = useState("");
+  const [extensionConnected, setExtensionConnected] = useState(false);
+  const [lastAction, setLastAction] = useState<string | null>(null);
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
 
@@ -168,6 +321,39 @@ export default function AICoachPage() {
     setShowUpgrade(true);
   }
 
+  // Test extension connection
+  async function testExtension(id: string) {
+    if (!id.trim()) return;
+    const res = await sendToExtension(id.trim(), "readPage", {});
+    if (res.success) {
+      setExtensionConnected(true);
+      setExtensionId(id.trim());
+    } else {
+      setExtensionConnected(false);
+      alert("Could not connect to extension. Make sure it is installed and the ID is correct.\n\nError: " + res.error);
+    }
+  }
+
+  // Execute actions returned by AI on the active tab via extension
+  async function executeActions(aiResponse: string, userCommand: string) {
+    if (!extensionConnected || !extensionId) return;
+
+    const actions = parseActionsFromResponse(aiResponse);
+    if (actions.length === 0) return;
+
+    for (const { action, payload } of actions) {
+      setLastAction(`Executing: ${action}...`);
+      const result = await sendToExtension(extensionId, action, payload);
+      if (!result.success) {
+        setLastAction(`Failed: ${action} — ${result.error}`);
+      } else {
+        setLastAction(`Done: ${action}`);
+      }
+      await new Promise(r => setTimeout(r, 400));
+    }
+    setTimeout(() => setLastAction(null), 3000);
+  }
+
   const analyzeFrame = useCallback(async (userMsg?: string) => {
     if (!captureVideoRef.current || !canvasRef.current) return;
     if (sessionState !== "active") return;
@@ -199,6 +385,10 @@ export default function AICoachPage() {
       const aiEntry: Message = { role: "assistant", content: data.response, timestamp: Date.now() };
       setMessages((prev) => [...prev, aiEntry]);
       speak(data.response);
+      // Auto-execute any actions the AI embedded in its response
+      if (extensionConnected) {
+        executeActions(data.response, userMsg ?? "");
+      }
     } catch (err) {
       console.error("Coach error:", err);
       const errMsg = "Sorry, I couldn't analyze the screen right now. Please try again.";
@@ -336,8 +526,8 @@ export default function AICoachPage() {
       }
       stream.getVideoTracks()[0].addEventListener("ended", stopSession);
       setSessionState("active");
-      const greeting = "I can see your screen! I'll analyze it automatically and guide you through your marketing tasks. You can type a command, or press the mic button and speak your task out loud.";
-      setMessages([{ role: "assistant", content: "👋 " + greeting, timestamp: Date.now() }]);
+      const greeting = "Screen connected. I'm your execution agent — I see your screen and produce ready-to-use output. Give me a command like 'write a reply to this email', 'draft an ad for this product', or 'summarize these analytics' and I'll generate the full output instantly.";
+      setMessages([{ role: "assistant", content: "�️ " + greeting, timestamp: Date.now() }]);
       speak(greeting);
     } catch (err) {
       console.error("Screen share error:", err);
@@ -419,6 +609,14 @@ export default function AICoachPage() {
             </div>
           )}
 
+          {/* Extension status pill */}
+          {isSessionActive && (
+            <div className={`hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-full border text-xs font-medium ${extensionConnected ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" : "bg-zinc-800 border-zinc-700 text-zinc-500"}`}>
+              <div className={`w-1.5 h-1.5 rounded-full ${extensionConnected ? "bg-emerald-400" : "bg-zinc-600"}`} />
+              {extensionConnected ? "Agent Active" : "No Extension"}
+            </div>
+          )}
+
           {/* TTS toggle */}
           {isSessionActive && (
             <button
@@ -492,6 +690,43 @@ export default function AICoachPage() {
               </div>
             )}
 
+            {/* Extension connection panel */}
+            <div className="mx-3 mb-3 bg-[#111118] border border-zinc-800 rounded-xl p-3">
+              <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <div className={`w-2 h-2 rounded-full ${extensionConnected ? "bg-emerald-400" : "bg-zinc-600"}`} />
+                Extension {extensionConnected ? "Connected" : "Not Connected"}
+              </div>
+              {!extensionConnected ? (
+                <div className="space-y-2">
+                  <input
+                    type="text"
+                    placeholder="Paste Extension ID..."
+                    className="w-full bg-zinc-900 border border-zinc-700 focus:border-[#c47d3b] rounded-lg px-3 py-2 text-xs text-white placeholder-zinc-600 focus:outline-none"
+                    onKeyDown={(e) => { if (e.key === "Enter") testExtension((e.target as HTMLInputElement).value); }}
+                    onBlur={(e) => { if (e.target.value) testExtension(e.target.value); }}
+                  />
+                  <p className="text-[10px] text-zinc-600 leading-relaxed">
+                    Install the extension from <code className="text-zinc-500">/extension</code> folder, then paste the ID shown in the extension popup.
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-1.5">
+                  <p className="text-xs text-emerald-400">AI can now execute actions on your active tab automatically.</p>
+                  {lastAction && (
+                    <div className="text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-lg px-2 py-1.5">
+                      {lastAction}
+                    </div>
+                  )}
+                  <button
+                    onClick={() => { setExtensionConnected(false); setExtensionId(""); }}
+                    className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors"
+                  >
+                    Disconnect
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* Voice status in sidebar */}
             {voiceState !== "off" && (
               <div className={`mx-3 mb-3 px-4 py-3 rounded-xl border text-xs font-medium flex items-center gap-2 ${
@@ -523,14 +758,14 @@ export default function AICoachPage() {
                 </div>
                 <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">AI Marketing Coach</h2>
                 <p className="text-zinc-400 text-sm leading-relaxed mb-6 max-w-sm mx-auto">
-                  Share your screen, type or speak a command, and the AI will guide you through any marketing task in real time.
+                  Share your screen and give a command. The AI produces the full output — complete emails, ad copy, social posts, form fills — ready to copy and paste instantly.
                 </p>
                 <div className="grid grid-cols-2 gap-2 mb-6 text-left">
                   {[
-                    { icon: "🎙️", title: "Voice Commands", desc: "Speak tasks hands-free" },
-                    { icon: "📢", title: "Ad Copy", desc: "Google, Meta, LinkedIn" },
-                    { icon: "📧", title: "Email", desc: "Subject lines, CTAs" },
-                    { icon: "📊", title: "Analytics", desc: "Interpret & act on data" },
+                    { icon: "📧", title: "Write Email", desc: "Full draft, ready to send" },
+                    { icon: "📢", title: "Write Ad Copy", desc: "All fields, all platforms" },
+                    { icon: "�", title: "Write Post", desc: "Caption + hashtags done" },
+                    { icon: "📊", title: "Read Analytics", desc: "Summary + action plan" },
                   ].map((f) => (
                     <div key={f.title} className="bg-[#111118] border border-zinc-800 rounded-xl p-3">
                       <div className="text-lg mb-1">{f.icon}</div>
@@ -576,19 +811,7 @@ export default function AICoachPage() {
                 )}
 
                 {messages.map((msg, i) => (
-                  <div key={i} className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 ${msg.role === "assistant" ? "bg-[#c47d3b]/20 border border-[#c47d3b]/30" : "bg-zinc-700 border border-zinc-600"}`}>
-                      {msg.role === "assistant" ? <Bot size={14} className="text-[#c47d3b]" /> : <User size={14} className="text-zinc-300" />}
-                    </div>
-                    <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${msg.role === "assistant" ? "bg-[#111118] border border-zinc-800 text-zinc-200 rounded-tl-sm" : "bg-[#c47d3b] text-white rounded-tr-sm"}`}>
-                      {msg.role === "assistant" && (
-                        <div className="text-xs text-zinc-500 mb-1.5 font-medium flex items-center gap-1.5">
-                          <Bot size={10} /> AI Coach
-                        </div>
-                      )}
-                      {msg.content}
-                    </div>
-                  </div>
+                  <MessageBubble key={i} msg={msg} />
                 ))}
 
                 {isAnalyzing && (
@@ -667,7 +890,7 @@ export default function AICoachPage() {
 
                 <p className="text-center text-xs text-zinc-700 mt-2">
                   {sessionState === "active"
-                    ? "🎙️ Press mic to speak a command · ⌨️ Type a task · 🔄 Auto-analyzes every 20s"
+                    ? "🎙️ Speak a command · ⌨️ Type a task · output appears ready to copy"
                     : sessionState === "paused"
                     ? "Session paused — resume to continue"
                     : "Upgrade to Pro for unlimited sessions"}
